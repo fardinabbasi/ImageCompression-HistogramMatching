@@ -72,8 +72,10 @@ $$A =
 ### SVD & FFT Method for Color Images
 | Method | Comperession Rate = 0.1% | Comperession Rate = 0.5% | Comperession Rate = 1% | Comperession Rate = 4% | Comperession Rate = 8% | Comperession Rate = 10%| Comperession Rate = 12% |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| SVD | <img src="/readme_images/cs1.png"> | <img src="/readme_images/cs2.png"> | <img src="/readme_images/cs3.png"> | <img src="/readme_images/cs4.png"> | <img src="/readme_imagesc/cs5.png"> | <img src="/readme_images/cs6.png"> | <img src="/readme_images/cs7.png"> |
+| SVD | <img src="/readme_images/cs1.png"> | <img src="/readme_images/cs2.png"> | <img src="/readme_images/cs3.png"> | <img src="/readme_images/cs4.png"> | <img src="/readme_images/cs5.png"> | <img src="/readme_images/cs6.png"> | <img src="/readme_images/cs7.png"> |
 | FFT | <img src="/readme_images/cf1.png"> | <img src="/readme_images/cf2.png"> | <img src="/readme_images/cf3.png"> | <img src="/readme_images/cf4.png"> | <img src="/readme_images/cf5.png"> | <img src="/readme_images/cf6.png"> | <img src="/readme_images/cf7.png"> |
-<h2> Part 2: Using FFT & SVD for Image Denoising </h2>
+
+In general, the FFT method provides **higher-quality** compression compared to the SVD method. This is due to the differences in their algorithms, where the FFT method allows for accurate **low-pass** and **high-pass** filtering. [Read More](https://ieeexplore.ieee.org/document/7424148)
+## Denoising
 <h2> Part 3: Histogram Matching </h2>
 <h2> Part 4: Modified Gram-Schmidt </h2>
