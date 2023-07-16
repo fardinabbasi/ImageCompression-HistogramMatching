@@ -63,9 +63,13 @@ $$A =
 0 & 0 & 1.75 & 3.5 \\
 0 & 0 & 0 & 1 \\
 \end{matrix}$$
+## Image Compression
+### SVD & FFT Method for Grayscale Images
+| Method | Comperession Rate = 0.1% | Comperession Rate = 0.5% | Comperession Rate = 1% | Comperession Rate = 4% | Comperession Rate = 8% | Comperession Rate = 10%| Comperession Rate = 12% |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| SVD | <img src="/readme_images/s1.png"> | <img src="/readme_images/s2.png"> | <img src="/readme_images/s3.png"> | <img src="/readme_images/s4.png"> | <img src="/readme_images/s5.png"> | <img src="/readme_images/s6.png"> | <img src="/readme_images/s7.png"> |
+| FFT | <img src="/readme_images/f1.png"> | <img src="/readme_images/f2.png"> | <img src="/readme_images/f3.png"> | <img src="/readme_images/f4.png"> | <img src="/readme_images/f5.png"> | <img src="/readme_images/f6.png"> | <img src="/readme_images/f7.png"> |
 
-	
-<h2> Part 1: Lagrangian Interpolation & LU Decomposition </h2>
 <h2> Part 2: Using FFT & SVD for Image Denoising </h2>
 <h2> Part 3: Histogram Matching </h2>
 <h2> Part 4: Modified Gram-Schmidt </h2>
