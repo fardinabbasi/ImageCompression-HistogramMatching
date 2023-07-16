@@ -33,7 +33,38 @@ The results are displayed below:
 
 The **best estimation** for n+1 points of data is n degree polynomial and in this case, the 6th degree has the lowest error.
 ## LU Decomposition
+Implementing LU Decomposition **from scratch** for an **upper Hessenberg matrix** using the provided code.
+```ruby
+def lu(A):
+	[r,c] = np.shape(A)
+	U = A.astype('float32')
+	L = np.eye(r)
+	for i in range(r-1):
+		fac=U[i+1,i]/U[i,i]
+		U[i+1,:]-=fac*U[i]
+		L[i+1,i]=fac
+	return L, U
+```
+$$A =
+\begin{matrix}
+1 & 4 & 2 & 3 \\
+3 & 4 & 1 & 7 \\
+0 & 2 & 3 & 4 \\
+0 & 0 & 1 & 3 \\
+\end{matrix}
+\rightarrow lu(A): L = \begin{matrix}
+1 & 0 & 0 & 0 \\
+3 & 1 & 0 & 0 \\
+0 & -0.25 & 1 & 0 \\
+0 & 0 & 0.5714 & 1 \\
+\end{matrix} ,  U = \begin{matrix}
+1 & 4 & 2 & 3 \\
+0 & -8 & -5 & -2 \\
+0 & 0 & 1.75 & 3.5 \\
+0 & 0 & 0 & 1 \\
+\end{matrix}$$
 
+	
 <h2> Part 1: Lagrangian Interpolation & LU Decomposition </h2>
 <h2> Part 2: Using FFT & SVD for Image Denoising </h2>
 <h2> Part 3: Histogram Matching </h2>
