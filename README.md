@@ -10,6 +10,30 @@ As an example, the calculation for the **quartic** function is provided below.
 
 <img src="/readme_images/p4.jpg">
 
+Implementing Lagrange interpolation **from scratch** for different degrees using the following code.
+```ruby
+def Lagrange (Lx, Ly,x):
+	est_y=[];
+	for i in x:
+		y=0
+		for k in range ( len(Lx) ):
+			t=1
+			for j in range ( len(Lx) ):
+				if j != k:
+					t=t* ((i-Lx[j]) /(Lx[k]-Lx[j]))
+			y+= t*Ly[k]
+		est_y.append(y)
+	return est_y
+```
+The results are displayed below:
+
+| Lagrange interpolation | Error |
+| --- | --- |
+| <img src="/readme_images/lagr_result.png"> | <img src="/readme_images/error.png"> |
+
+The **best estimation** for n+1 points of data is n degree polynomial and in this case, the 6th degree has the lowest error.
+## LU Decomposition
+
 <h2> Part 1: Lagrangian Interpolation & LU Decomposition </h2>
 <h2> Part 2: Using FFT & SVD for Image Denoising </h2>
 <h2> Part 3: Histogram Matching </h2>
