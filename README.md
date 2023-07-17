@@ -77,5 +77,6 @@ $$A =
 
 In general, the FFT method provides **higher-quality** compression compared to the SVD method. This is due to the differences in their algorithms, where the FFT method allows for accurate **low-pass** and **high-pass** filtering. [Read More](https://ieeexplore.ieee.org/document/7424148)
 ## Denoising
+Since noise in an image is like a **DC offset** in its **singular values**, it can be eliminated by calculating the differences between two singular values and cutting those whose differences are less than the **threshold**.
 <h2> Part 3: Histogram Matching </h2>
 <h2> Part 4: Modified Gram-Schmidt </h2>
