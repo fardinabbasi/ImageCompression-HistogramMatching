@@ -159,7 +159,7 @@ def Normalize(input_CDF):
 <img src="/readme_images/matched.png">
 
 ## Modified Gram-Schmidt
-To determine Q in QR decomposition, the Gram-Schmidt method is commonly employed. However, the traditional Gram-Schmidt method is susceptible to rounding errors and other issues. As an alternative, the modified Gram-Schmidt method can be utilized. The code provided below demonstrates the implementation of QR decomposition from scratch using both the Gram-Schmidt and modified Gram-Schmidt algorithms:
+To determine Q in **QR decomposition**, the Gram-Schmidt method is commonly employed. However, the traditional Gram-Schmidt method is **susceptible to rounding errors** and other issues. As an alternative, the **modified Gram-Schmidt** method can be utilized. The code provided below demonstrates the implementation of QR decomposition from scratch using both the Gram-Schmidt and modified Gram-Schmidt algorithms:
 ```ruby
 def QR(A):
 	r, c = A.shape
@@ -195,4 +195,6 @@ def QR_Modified_Decomposition(A):
 			u[:, j] -= (np.dot(Q[:, i] , u[:, j]))* Q[:, i] # get each u vector
 	return Q,R
 ```
-<img src="/readme_images/gram.png">
+<img src="/readme_images/gram2.png">
+
+According to the presented results, in larger row sizes, the modified Gram-Schmidt algorithm performs better and produces results similar to singular values of A. In contrast, classic Gram-Schmidt produces a higher error.
