@@ -78,5 +78,53 @@ $$A =
 In general, the FFT method provides **higher-quality** compression compared to the SVD method. This is due to the differences in their algorithms, where the FFT method allows for accurate **low-pass** and **high-pass** filtering. [Read More](https://ieeexplore.ieee.org/document/7424148)
 ## Denoising
 Since noise in an image is like a **DC offset** in its **singular values**, it can be eliminated by calculating the differences between two singular values and cutting those whose differences are less than the **threshold**.
+Here is the implementation of image denoising using the SVD method **from scratch**.
+```ruby
+def SVD_Denoise(filename, rank):
+  img = Image.open(filename)
+  img = np.asarray(img)
+  denoised_img = np.zeros(img.shape)
+  for rgb in range(img.shape[2]):
+    U, S, V = np.linalg.svd(img[:,:,rgb])
+    denoised_img[:,:,rgb] = np.matmul(np.matmul(U[:, :rank] , np.diag(S[:rank])) , V[:rank, :])
+
+  for ind1, row in enumerate(denoised_img):
+    for ind2, col in enumerate(row):
+      for ind3, value in enumerate(col):
+        if value < 0:
+          denoised_img[ind1,ind2,ind3] = abs(value)
+        if value > 255:
+          denoised_img[ind1,ind2,ind3] = 255  
+  return denoised_img.astype(np.uint8)
+```
+<img src="/readme_images/s_noise.png">
+
+Because noises have high frequencies, the FFT of the image can be used to determine the cut-off frequency for preserving only a specific frequency range.
+Here is the implementation of image denoising using the FFT method **from scratch**.
+
+```ruby
+def FFT_Denoise(filename, r):
+  img = Image.open(filename)
+  img = np.asarray(img)
+  denoised_img = np.zeros(img.shape)
+
+  for rgb in range(img.shape[2]):
+    fft_img = np.fft.fft2(img[:,:,rgb])
+    rows, cols = fft_img.shape
+    fft_img[int(rows*r):int(rows*(1-r)),:] = 0
+    fft_img[:, int(cols*r):int(cols*(1-r))] = 0
+    denoised_img[:,:,rgb] = np.fft.ifft2(fft_img).real
+
+  for ind1, row in enumerate(denoised_img):
+    for ind2, col in enumerate(row):
+      for ind3, value in enumerate(col):
+        if value < 0:
+          denoised_img[ind1,ind2,ind3] = abs(value)
+        if value > 255:
+          denoised_img[ind1,ind2,ind3] = 255  
+  return denoised_img.astype(np.uint8)
+```
+<img src="/readme_images/f_noise.png">
+
 <h2> Part 3: Histogram Matching </h2>
 <h2> Part 4: Modified Gram-Schmidt </h2>
