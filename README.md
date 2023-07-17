@@ -127,6 +127,72 @@ def FFT_Denoise(filename, r):
 <img src="/readme_images/f_noise.png">
 
 ## Histogram Matching
+Histogram matching is a quick and easy way to "**calibrate**" one image to match another. In mathematical terms, it's the process of transforming one image so that the **cumulative distribution function** (CDF) of values in each band matches the CDF of bands in another image.
 
+Here is the implementation of Histogram matching **from scratch** with the results.
+```ruby
+def Matching_Histogram(Reference, Source):
+  num_bins = 255
+  matched_image = Source
+  for rgb in range(Source.shape[2]):
+    # Calculate CDF of the images:
+    ref_CDF, bins = CDF(Reference, rgb, num_bins)
+    src_CDF, bins = CDF(Source, rgb, num_bins)
+    # Normalizing the CDFs:
+    ref_CDF = Normalize(ref_CDF)
+    src_CDF = Normalize(src_CDF)
+    # Matching the images:
+    new_src = np.interp(Source[:,:,rgb].flatten(), bins[:-1], src_CDF)
+    changed_src = np.interp(new_src, ref_CDF, bins[:-1])
+    matched_image[:,:,rgb] = changed_src.reshape((Source.shape[0],Source.shape[1]))
+  return matched_image
+```
+```ruby
+def CDF(input, rgb, num_bins):
+  Hist, bins = np.histogram(input[:,:,rgb].flatten(), num_bins)
+  cdf = np.cumsum(Hist)
+  return cdf, bins
+
+def Normalize(input_CDF):
+  return (255*input_CDF/input_CDF[-1]).astype(np.uint8)
+```
+<img src="/readme_images/matched.png">
 
 ## Modified Gram-Schmidt
+To determine Q in QR decomposition, the Gram-Schmidt method is commonly employed. However, the traditional Gram-Schmidt method is susceptible to rounding errors and other issues. As an alternative, the modified Gram-Schmidt method can be utilized. The code provided below demonstrates the implementation of QR decomposition from scratch using both the Gram-Schmidt and modified Gram-Schmidt algorithms:
+```ruby
+def QR(A):
+	r, c = A.shape
+	Q = np.zeros((r, c),dtype=np.float64) # initialize matrix Q
+	u = np.zeros((r, c),dtype=np.float64) # initialize matrix u
+	u[:, 0] = copy.copy(A[:, 0])
+	Q[:, 0] = u[:, 0] / np.linalg.norm(u[:, 0])
+	for i in range(1, c):
+		u[:, i] = A[:, i]
+		for j in range(i):
+			u[:, i] -= np.dot(A[:, i] , Q[:, j]) * Q[:, j] # get each u vector
+		Q[:, i] = u[:, i] / np.linalg.norm(u[:, i]) # compute each e vetor
+   # QT=np.transpose(Q)
+	R = np.zeros((r, c),dtype=np.float64)
+	for i in range(n):
+		for j in range(i, c):
+			R[i, j] = np.dot(A[:, j] , Q[:, i])
+    #R=np.matmul(QT,A)
+	return Q,R
+```
+```ruby
+def QR_Modified_Decomposition(A):
+	r, c = A.shape # get the shape of A
+	Q = np.zeros((r, c),dtype=np.float64) # initialize matrix Q
+   # u = np.zeros((n, m),dtype=np.float64) # initialize matrix u
+	R = np.zeros((r, c),dtype=np.float64)
+	u = copy.copy(A)
+	for i in range(c):
+		R[i,i]=np.linalg.norm(u[:, i])
+		Q[:, i] = u[:, i] / np.linalg.norm(u[:, i])
+		for j in range(i,n):
+			R[i,j]= np.dot(Q[:, i] , u[:, j])
+			u[:, j] -= (np.dot(Q[:, i] , u[:, j]))* Q[:, i] # get each u vector
+	return Q,R
+```
+<img src="/readme_images/gram.png">
