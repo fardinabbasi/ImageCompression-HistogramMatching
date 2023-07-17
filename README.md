@@ -99,7 +99,7 @@ def SVD_Denoise(filename, rank):
 ```
 <img src="/readme_images/s_noise.png">
 
-Because noises have high frequencies, the FFT of the image can be used to determine the cut-off frequency for preserving only a specific frequency range.
+Because noises have **high frequencies**, the FFT of the image can be used to determine the **cut-off frequency** for preserving only a specific frequency range.
 Here is the implementation of image denoising using the FFT method **from scratch**.
 
 ```ruby
@@ -126,5 +126,7 @@ def FFT_Denoise(filename, r):
 ```
 <img src="/readme_images/f_noise.png">
 
-<h2> Part 3: Histogram Matching </h2>
-<h2> Part 4: Modified Gram-Schmidt </h2>
+## Histogram Matching
+
+
+## Modified Gram-Schmidt
