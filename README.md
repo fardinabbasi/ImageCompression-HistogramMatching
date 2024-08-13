@@ -8,7 +8,7 @@ $f(x) = [2.718,0.797,0.368,0.597,1.712,2.718,2.7]$
 
 As an example, the calculation for the **quartic** function is provided below.
 
-<img src="/readme_images/p4.jpg">
+<img src="./doc/p4.jpg">
 
 Implementing Lagrange interpolation **from scratch** for different degrees using the following code.
 ```ruby
@@ -29,7 +29,7 @@ The results are displayed below:
 
 | Lagrange interpolation | Error |
 | --- | --- |
-| <img src="/readme_images/lagr_result.png"> | <img src="/readme_images/error.png"> |
+| <img src="./doc/lagr_result.png"> | <img src="./doc/error.png"> |
 
 The **best estimation** for n+1 points of data is n degree polynomial and in this case, the 6th degree has the lowest error.
 ## LU Decomposition
@@ -67,13 +67,13 @@ $$A =
 ### SVD & FFT Method for Grayscale Images
 | Method | Comperession Rate = 0.1% | Comperession Rate = 0.5% | Comperession Rate = 1% | Comperession Rate = 4% | Comperession Rate = 8% | Comperession Rate = 10%| Comperession Rate = 12% |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| SVD | <img src="/readme_images/s1.png"> | <img src="/readme_images/s2.png"> | <img src="/readme_images/s3.png"> | <img src="/readme_images/s4.png"> | <img src="/readme_images/s5.png"> | <img src="/readme_images/s6.png"> | <img src="/readme_images/s7.png"> |
-| FFT | <img src="/readme_images/f1.png"> | <img src="/readme_images/f2.png"> | <img src="/readme_images/f3.png"> | <img src="/readme_images/f4.png"> | <img src="/readme_images/f5.png"> | <img src="/readme_images/f6.png"> | <img src="/readme_images/f7.png"> |
+| SVD | <img src="./doc/s1.png"> | <img src="./doc/s2.png"> | <img src="./doc/s3.png"> | <img src="./doc/s4.png"> | <img src="./doc/s5.png"> | <img src="./doc/s6.png"> | <img src="./doc/s7.png"> |
+| FFT | <img src="./doc/f1.png"> | <img src="./doc/f2.png"> | <img src="./doc/f3.png"> | <img src="./doc/f4.png"> | <img src="./doc/f5.png"> | <img src="./doc/f6.png"> | <img src="./doc/f7.png"> |
 ### SVD & FFT Method for Color Images
 | Method | Comperession Rate = 0.1% | Comperession Rate = 0.5% | Comperession Rate = 1% | Comperession Rate = 4% | Comperession Rate = 8% | Comperession Rate = 10%| Comperession Rate = 12% |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| SVD | <img src="/readme_images/cs1.png"> | <img src="/readme_images/cs2.png"> | <img src="/readme_images/cs3.png"> | <img src="/readme_images/cs4.png"> | <img src="/readme_images/cs5.png"> | <img src="/readme_images/cs6.png"> | <img src="/readme_images/cs7.png"> |
-| FFT | <img src="/readme_images/cf1.png"> | <img src="/readme_images/cf2.png"> | <img src="/readme_images/cf3.png"> | <img src="/readme_images/cf4.png"> | <img src="/readme_images/cf5.png"> | <img src="/readme_images/cf6.png"> | <img src="/readme_images/cf7.png"> |
+| SVD | <img src="./doc/cs1.png"> | <img src="./doc/cs2.png"> | <img src="./doc/cs3.png"> | <img src="./doc/cs4.png"> | <img src="./doc/cs5.png"> | <img src="./doc/cs6.png"> | <img src="./doc/cs7.png"> |
+| FFT | <img src="./doc/cf1.png"> | <img src="./doc/cf2.png"> | <img src="./doc/cf3.png"> | <img src="./doc/cf4.png"> | <img src="./doc/cf5.png"> | <img src="./doc/cf6.png"> | <img src="./doc/cf7.png"> |
 
 In general, the FFT method provides **higher-quality** compression compared to the SVD method. This is due to the differences in their algorithms, where the FFT method allows for accurate **low-pass** and **high-pass** filtering. [Read More](https://ieeexplore.ieee.org/document/7424148)
 ## Denoising
@@ -97,7 +97,7 @@ def SVD_Denoise(filename, rank):
           denoised_img[ind1,ind2,ind3] = 255  
   return denoised_img.astype(np.uint8)
 ```
-<img src="/readme_images/s_noise.png">
+<img src="./doc/s_noise.png">
 
 Because noises have **high frequencies**, the FFT of the image can be used to determine the **cut-off frequency** for preserving only a specific frequency range.
 Here is the implementation of image denoising using the FFT method **from scratch**.
@@ -124,7 +124,7 @@ def FFT_Denoise(filename, r):
           denoised_img[ind1,ind2,ind3] = 255  
   return denoised_img.astype(np.uint8)
 ```
-<img src="/readme_images/f_noise.png">
+<img src="./doc/f_noise.png">
 
 ## Histogram Matching
 Histogram matching is a quick and easy way to "**calibrate**" one image to match another. In mathematical terms, it's the process of transforming one image so that the **cumulative distribution function** (CDF) of values in each band matches the CDF of bands in another image.
@@ -156,7 +156,7 @@ def CDF(input, rgb, num_bins):
 def Normalize(input_CDF):
   return (255*input_CDF/input_CDF[-1]).astype(np.uint8)
 ```
-<img src="/readme_images/matched.png">
+<img src="./doc/matched.png">
 
 ## Modified Gram-Schmidt
 To determine Q in **QR decomposition**, the Gram-Schmidt method is commonly employed. However, the traditional Gram-Schmidt method is **susceptible to rounding errors** and other issues. As an alternative, the **modified Gram-Schmidt** method can be utilized. The code provided below demonstrates the implementation of QR decomposition from scratch using both the Gram-Schmidt and modified Gram-Schmidt algorithms:
@@ -195,6 +195,12 @@ def QR_Modified_Decomposition(A):
 			u[:, j] -= (np.dot(Q[:, i] , u[:, j]))* Q[:, i] # get each u vector
 	return Q,R
 ```
-<img src="/readme_images/gram2.png">
+<img src="./doc/gram2.png">
 
 According to the presented results, in larger row sizes, the modified Gram-Schmidt algorithm performs better and produces results similar to singular values of A. In contrast, classic Gram-Schmidt produces a higher error.
+
+## Course Description
+- **Course**: Linear Algebra [ECE 174]
+- **Semester**: Fall 2022
+- **Institution:** [School of Electrical & Computer Engineering](https://ece.ut.ac.ir/en/), [College of Engineering](https://eng.ut.ac.ir/en), [University of Tehran](https://ut.ac.ir/en)
+- **Instructors:** Dr. Sarafraz
